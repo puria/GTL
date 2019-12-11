@@ -5,10 +5,6 @@
 from GTL.set_unicode import *
 
 
-
-
-
-
 ### FUNCTIONS
 
 # draw_bit_chr
