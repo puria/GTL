@@ -5,9 +5,9 @@ import os
 
 import fontParts.world as fp
 
-from GTL_syntax import syntax
 from GTL_params import width_ratio, fnt_baseline, font_name, style_name, fnt_dsc, fnt_xht, fnt_cap, fnt_asc, \
     box_layout, out_path, txt_path
+from GTL_syntax import syntax
 from GTL import draw_bits, txt_reader
 
 
