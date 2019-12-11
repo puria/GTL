@@ -43,7 +43,7 @@ O -> draw a circle
 ```
 and by combining the inputs generates an actual, usable font:
 
-![https://raw.githubusercontent.com/bbtgnn/GTL/master/readme_images/Aa.png](https://raw.githubusercontent.com/bbtgnn/GTL/master/readme_images/Aa.png)
+![docs/assets/Aa.png](docs/assets/Aa.png)
 The GTL is the perfect tool for the development of lazy-brutal-discrete typefaces, allowing for a fast and flexible drawing process: just by changing the syntax is it possible to generate endless variations for the same letter structure!
 
 The GTL is meant to be used by everyone. If you're curious, let's dive in!
@@ -290,19 +290,19 @@ style_name = "Regular"
 ## FONT METRICS
 # For the font metrics section, you just have to count the rows as shown in this example:
 ```
-![https://raw.githubusercontent.com/bbtgnn/GTL/master/readme_images/metrics.png](https://raw.githubusercontent.com/bbtgnn/GTL/master/readme_images/metrics.png)
+![docs/assets/metrics.png](docs/assets/metrics.png)
 ```
 ## BOX PROPERTIES
 
 # FLOAT - Set box width ratio (width_ratio=1 for square proportions)
 width_ratio = 1
 ```
-![https://raw.githubusercontent.com/bbtgnn/GTL/master/readme_images/width_ratio.png](https://raw.githubusercontent.com/bbtgnn/GTL/master/readme_images/width_ratio.png)
+![docs/assets/width_ratio.png](docs/assets/width_ratio.png)
 ```
 # (INT, INT) - Set box layout (e.g. box_layout = (1,1))
 box_layout = 1,1
 ```
-![https://raw.githubusercontent.com/bbtgnn/GTL/master/readme_images/box_layout.png](https://raw.githubusercontent.com/bbtgnn/GTL/master/readme_images/box_layout.png)
+![docs/assets/box_layout.png](docs/assets/box_layout.png)
 
 \-
 #### 2.3.2 - Terminal instructions to make magic happen
