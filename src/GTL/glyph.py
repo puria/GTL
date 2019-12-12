@@ -2,7 +2,6 @@ import json
 
 from GTL.cell import Cell
 
-
 class Glyph:
     def __init__(self, name, typeface):
         self.name = name
@@ -31,12 +30,8 @@ class Glyph:
         box_y = self.tf.bottom # We start from the descender, then we go all the way up
 
         for line in reversed(range(self.lines)):
-            print(f"LINE: {line}")
             for row in range(self.rows):
-                print(f"ROW: {row}")
-                print(box_x, box_y)
                 cell = Cell.first_by_position(row, line, self.cells)
-                print(cell)
                 cell.render(box_x, box_y)
                 box_x += self.tf.box.w
             box_x = 0
