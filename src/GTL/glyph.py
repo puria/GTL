@@ -2,6 +2,7 @@ import json
 
 from GTL.cell import Cell
 
+
 class Glyph:
     def __init__(self, name, typeface):
         self.name = name
