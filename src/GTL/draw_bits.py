@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ### MODULES
-
-from GTL.set_unicode import *
+from GTL.GTL_syntax import syntax
 
 
 ### FUNCTIONS
@@ -13,9 +12,12 @@ from GTL.set_unicode import *
 # For each cell, a drawing function specified in the syntax dictionary gets executed.
 
 # RGlyph, string, (float, float), (float, float), (int, int), dictionary
-def draw_bit_chr(gly, char, box, box_layout, syntax):
+from GTL.set_unicode.set_unicode import set_unicode
 
-    if char in syntax.keys():
+
+def draw_bit_chr(gly, line, row, char, box, box_layout):
+
+    if char['unicode'] in syntax.keys():
 
         # Unpacking
         box_x, box_y, box_w, box_h = box
@@ -52,13 +54,13 @@ def draw_bit_chr(gly, char, box, box_layout, syntax):
 # This function iterates draw_bit_chr over a string (line) of characters.
 
 # RGlyph, string, (float, float), (float, float), (int, int), dictionary
-def draw_bit_lin(gly, char_line, box, box_layout, syntax):
+def draw_bit_lin(gly, line, gly_desc, box, box_layout):
 
     # Unpacking
     box_x, box_y, box_w, box_h = box
 
-    for char in char_line:
-        draw_bit_chr(gly, char, (box_x, box_y, box_w, box_h), box_layout, syntax)
+    for row in range(gly_desc['rows']):
+        draw_bit_chr(gly, line, row, gly_desc, (box_x, box_y, box_w, box_h), box_layout)
 
         # Translating the x position by the width of the box
         box_x += box_w
@@ -70,15 +72,15 @@ def draw_bit_lin(gly, char_line, box, box_layout, syntax):
 # (So it draws the full glyph)
 
 # RGlyph, list of lists, float, (float, float), (int, int), dictionary -> RGlyph
-def draw_bit_gly(gly, gly_desc, dsc_hgt, box_size, box_layout, syntax):
+def draw_bit_gly(gly, gly_desc, dsc_hgt, box_size, box_layout):
 
     # Setting starting coordinates
     box_x = 0
     box_y = dsc_hgt    # We start from the descender, then we go all the way up
 
     # Iterating over glyph instructions (but backwards, so that we start from the descenders)
-    for char_line in gly_desc[::-1]:
-        draw_bit_lin(gly, char_line, (box_x, box_y, *box_size), box_layout, syntax)
+    for line in reversed(range(gly_desc['lines'])):
+        draw_bit_lin(gly, line, gly_desc, (box_x, box_y, *box_size), box_layout)
 
         # Updating position once a row of characters (lin) is completed
         box_x = 0
@@ -87,12 +89,11 @@ def draw_bit_gly(gly, gly_desc, dsc_hgt, box_size, box_layout, syntax):
     return gly
 
 
-
 # draw_bit_fnt
 # This function generates a full set of *alternative* (alt) glyphs from instructions.
 
 # RFont, dictionary, string, float, (float, float), (int, int), dictionary -> RFont
-def draw_bit_fnt(fnt, fnt_dict, dsc_hgt, box_size, box_layout, syntax):
+def draw_bit_fnt(fnt, fnt_dict, dsc_hgt, box_size, box_layout):
 
     # Iterating over the dictionary (the instructions)
     for gly_name in fnt_dict.keys():
@@ -106,9 +107,13 @@ def draw_bit_fnt(fnt, fnt_dict, dsc_hgt, box_size, box_layout, syntax):
         gly_desc = fnt_dict[gly_name]
 
         # Setting glyph width
-        gly.width = box_size[0] * len(gly_desc[0])
+        gly.width = box_size[0] * gly_desc['rows']
 
         # Drawing the glyph
-        draw_bit_gly(gly, gly_desc, dsc_hgt, box_size, box_layout, syntax)
+        draw_bit_gly(gly, gly_desc, dsc_hgt, box_size, box_layout)
 
     return fnt
+
+
+def draw(typeface, glyphs, dsc_hgt, box_size, box_layout):
+    return draw_bit_fnt(typeface, glyphs, dsc_hgt, box_size, box_layout)

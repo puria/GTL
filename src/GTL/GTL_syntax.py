@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
-from GTL.shape_functions import *
-
 
 
 ### CONSTANTS
+from GTL.shape_functions.do_nothing import do_nothing
+from GTL.shape_functions.rectangle import rectangle
+
 ORIENTATIONS = ["NW", "NE", "SW", "SE"]
 
 
@@ -19,11 +20,11 @@ ORIENTATIONS = ["NW", "NE", "SW", "SE"]
 #     }
 
 
-# p_rectangle = {
-#     "scale_x": 1,
-#     "scale_y": 1,
-#     "rotation": 0
-#     }
+rectangle_props = {
+    "scale_x": 1,
+    "scale_y": 1,
+    "rotation": 0
+}
 
 
 # p_ellipse = {
@@ -76,5 +77,6 @@ ORIENTATIONS = ["NW", "NE", "SW", "SE"]
 ### SYNTAX
 
 syntax = {
-	# Add your instructions here!
+    "·": (do_nothing, {}),
+    "│": (rectangle, rectangle_props)
 }

@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import random
-import types
 
 
 
@@ -69,7 +68,6 @@ def set_property(p):
 
 # RContour, tuple, dictionary ->
 def contour_operations(c, box, properties):
-
     # Gathering data
     x, y = box[0], box[1]
     scl_x = set_property(properties["scale_x"])
